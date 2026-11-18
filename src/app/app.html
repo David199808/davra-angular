@@ -1,3 +1,7 @@
+<header>
+  <app-encabezado></app-encabezado>
+</header>
+
 <section>
   @for (producto of productos; track producto.id) {
     <app-tarjeta-producto [producto]="producto" (agregar)="agregar($event)"></app-tarjeta-producto>

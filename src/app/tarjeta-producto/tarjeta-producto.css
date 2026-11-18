@@ -1,0 +1,38 @@
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+select,
+button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font: inherit;
+}
+
+button {
+  border: none;
+  background: var(--fondo-negro);
+  color: var(--color-letra);
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.97);
+}

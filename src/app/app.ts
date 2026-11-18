@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { PRODUCTOS } from './datos/catalogo';
 import { Talla } from './modelos/producto';
 import { TarjetaProducto } from './tarjeta-producto/tarjeta-producto';
+import { Encabezado } from './encabezado/encabezado';
 
 @Component({
-  imports: [TarjetaProducto],
+  imports: [TarjetaProducto, Encabezado],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
