@@ -1,0 +1,12 @@
+<article>
+  <img [src]="producto().imagen" [alt]="producto().nombre" />
+  <h2>{{ producto().nombre }}</h2>
+  <p>{{ producto().precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</p>
+  <select #selectTalla>
+    @for (talla of producto().tallas; track talla) {
+      <option [value]="talla">{{ talla }}</option>
+    }
+  </select>
+
+  <button (click)="avisar(selectTalla.value)">Agregar al carrito</button>
+</article>

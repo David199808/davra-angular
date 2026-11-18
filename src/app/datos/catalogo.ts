@@ -1,6 +1,6 @@
 import { Producto } from '../modelos/producto';
 
-const PRODUCTOS: Producto[] = [
+export const PRODUCTOS: Producto[] = [
   // ------ PRODUCTOS HOMBRE ------ //
   {
     id: 1,
