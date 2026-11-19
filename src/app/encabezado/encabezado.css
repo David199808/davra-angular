@@ -11,3 +11,40 @@
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
+/*-----BARRA DE NAVEGACIÓN-----*/
+
+.menu {
+  max-width: 1250px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 5px #000;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(8px);
+}
+
+.menu__link {
+  display: inline-block;
+  font-weight: bolder;
+  font-size: 1.2rem;
+  text-decoration: none;
+  padding: 4px;
+  color: #fff;
+  background-color: #000;
+  transform: skewX(-20deg);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu__link--activo {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/*-----BARRA DE NAVEGACIÓN END-----*/

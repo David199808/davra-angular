@@ -4,5 +4,14 @@
     src="imagenes/DAvRA-logo-paquete/01_principal/daura-simbolo-blanco-transparente.png"
     alt="logo Davra"
   />
-  <span>🛒 {{ carrito.cantidad() }}</span>
 </header>
+
+<!-- BARRA DE NAVEGACION -->
+<nav class="menu">
+  <a class="menu__link menu__link--activo" href="index.html">INICIO</a>
+  <a class="menu__link" href="secciones/hombre.html">HOMBRE</a>
+  <a class="menu__link" href="secciones/mujer.html">MUJER</a>
+  <a class="menu__link" href="secciones/carrito.html"
+    >CARRITO <span>🛒 ({{ carrito.cantidad() }})</span></a
+  >
+</nav>
