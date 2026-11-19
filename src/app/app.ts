@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { PRODUCTOS } from './datos/catalogo';
-import { Talla } from './modelos/producto';
 import { TarjetaProducto } from './tarjeta-producto/tarjeta-producto';
 import { Encabezado } from './encabezado/encabezado';
 import { Carrito, Pedido } from './servicios/carrito';
@@ -12,10 +11,11 @@ import { Carrito, Pedido } from './servicios/carrito';
   templateUrl: './app.html',
 })
 export class App {
-  productos = PRODUCTOS;
   carrito = inject(Carrito);
+  productos = PRODUCTOS;
 
-  agregar(pedido: Pedido) {
+  agregar(pedido: Omit<Pedido, 'cantidad'>) {
     this.carrito.agregar(pedido);
+    console.log(this.carrito.items());
   }
 }
