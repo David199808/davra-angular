@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PRODUCTOS } from './datos/catalogo';
 import { Talla } from './modelos/producto';
 import { TarjetaProducto } from './tarjeta-producto/tarjeta-producto';
 import { Encabezado } from './encabezado/encabezado';
+import { Carrito, Pedido } from './servicios/carrito';
 
 @Component({
   imports: [TarjetaProducto, Encabezado],
@@ -12,8 +13,9 @@ import { Encabezado } from './encabezado/encabezado';
 })
 export class App {
   productos = PRODUCTOS;
+  carrito = inject(Carrito);
 
-  agregar(pedido: { id: number; talla: Talla }) {
-    console.log('Agregaron:', pedido);
+  agregar(pedido: Pedido) {
+    this.carrito.agregar(pedido);
   }
 }
