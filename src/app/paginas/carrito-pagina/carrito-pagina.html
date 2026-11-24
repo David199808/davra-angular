@@ -1,6 +1,9 @@
 <ul>
   @for (prenda of carrito.items(); track prenda.id + prenda.talla) {
-    <li>{{ prenda.id }} - {{ prenda.talla }} - {{ prenda.cantidad }}</li>
+    @let producto = buscar(prenda.id);
+    @if (producto) {
+      <li>{{ producto.nombre }} - {{ prenda.talla }} x {{ prenda.cantidad }}</li>
+    }
   } @empty {
     <li>Tu carrito está vacío</li>
   }
