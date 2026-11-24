@@ -1,7 +1,2 @@
 <app-encabezado></app-encabezado>
-
-<section>
-  @for (producto of productos; track producto.id) {
-    <app-tarjeta-producto [producto]="producto" (agregar)="agregar($event)"></app-tarjeta-producto>
-  }
-</section>
+<router-outlet></router-outlet>

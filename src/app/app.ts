@@ -1,21 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { PRODUCTOS } from './datos/catalogo';
-import { TarjetaProducto } from './tarjeta-producto/tarjeta-producto';
+import { Component } from '@angular/core';
 import { Encabezado } from './encabezado/encabezado';
-import { Carrito, Pedido } from './servicios/carrito';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [TarjetaProducto, Encabezado],
+  imports: [Encabezado, RouterOutlet],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
-export class App {
-  carrito = inject(Carrito);
-  productos = PRODUCTOS;
-
-  agregar(pedido: Omit<Pedido, 'cantidad'>) {
-    this.carrito.agregar(pedido);
-    console.log(this.carrito.items());
-  }
-}
+export class App {}

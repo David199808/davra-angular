@@ -1,7 +1,5 @@
 import { computed, Service, signal } from '@angular/core';
-import { Talla } from '../modelos/producto';
-
-export type Pedido = { id: number; talla: Talla; cantidad: number };
+import { Pedido } from '../modelos/pedido';
 
 @Service()
 export class Carrito {
