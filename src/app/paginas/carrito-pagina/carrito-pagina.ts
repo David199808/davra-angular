@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Carrito } from '../../servicios/carrito';
 
 @Component({
   imports: [],
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './carrito-pagina.css',
   templateUrl: './carrito-pagina.html',
 })
-export class CarritoPagina {}
+export class CarritoPagina {
+  carrito = inject(Carrito);
+}
