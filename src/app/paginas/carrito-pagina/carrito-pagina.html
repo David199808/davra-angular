@@ -2,9 +2,16 @@
   @for (prenda of carrito.items(); track prenda.id + prenda.talla) {
     @let producto = buscar(prenda.id);
     @if (producto) {
-      <li>{{ producto.nombre }} - {{ prenda.talla }} x {{ prenda.cantidad }}</li>
+      <img [src]="producto.imagen" [alt]="producto.nombre" width="60" />
+      <li>
+        {{ producto.nombre }} - {{ prenda.talla }} x {{ prenda.cantidad }} =
+        {{ producto.precio * prenda.cantidad | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+      </li>
     }
   } @empty {
     <li>Tu carrito está vacío</li>
   }
 </ul>
+<p>
+  <strong>Total a pagar: {{ total() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</strong>
+</p>
