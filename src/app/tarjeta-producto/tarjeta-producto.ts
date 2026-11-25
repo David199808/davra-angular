@@ -10,9 +10,9 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class TarjetaProducto {
   producto = input.required<Producto>();
-  agregar = output<{ id: number; talla: Talla }>();
+  pedir = output<{ id: number; talla: Talla }>();
 
   avisar(talla: string) {
-    this.agregar.emit({ id: this.producto().id, talla: talla as Talla });
+    this.pedir.emit({ id: this.producto().id, talla: talla as Talla });
   }
 }

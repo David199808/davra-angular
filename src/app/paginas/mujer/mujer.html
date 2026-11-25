@@ -1,0 +1,5 @@
+<section>
+  @for (prenda of productos; track prenda.id) {
+    <app-tarjeta-producto [producto]="prenda" (pedir)="agregar($event)"></app-tarjeta-producto>
+  }
+</section>

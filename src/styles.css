@@ -13,3 +13,10 @@ body {
   --fondo-negro: #000;
   --color-letra: #fff;
 }
+
+section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
