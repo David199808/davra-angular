@@ -2,9 +2,10 @@ import { Component, computed, inject } from '@angular/core';
 import { Carrito } from '../../servicios/carrito';
 import { PRODUCTOS } from '../../datos/catalogo';
 import { CurrencyPipe } from '@angular/common';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, ReactiveFormsModule],
   selector: 'app-carrito-pagina',
   styleUrl: './carrito-pagina.css',
   templateUrl: './carrito-pagina.html',
@@ -22,4 +23,11 @@ export class CarritoPagina {
   buscar(id: number) {
     return this.productos.find((p) => p.id === id);
   }
+
+  envio = new FormGroup({
+    nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    ciudad: new FormControl('', [Validators.required]),
+    direccion: new FormControl('', [Validators.required]),
+    celular: new FormControl('', [Validators.required, Validators.pattern(/^3\d{9}$/)]),
+  });
 }
