@@ -1,5 +1,6 @@
 import { computed, Service, signal } from '@angular/core';
 import { Pedido } from '../modelos/pedido';
+import { Talla } from '../modelos/producto';
 
 @Service()
 export class Carrito {
@@ -19,6 +20,22 @@ export class Carrito {
     } else {
       //Si no existe: agregarlo con cantidad 1
       this.items.update((anterior) => [...anterior, { ...pedido, cantidad: 1 }]);
+    }
+  }
+
+  quitar(id: number, talla: Talla) {
+    this.items.update((anterior) => anterior.filter((p) => !(p.id === id && p.talla === talla)));
+  }
+
+  restar(id: number, talla: Talla) {
+    const existe = this.items().find((p) => p.id === id && p.talla === talla);
+
+    if (!existe) return;
+    if (existe.cantidad > 1) {
+      existe.cantidad -= 1;
+      this.items.set([...this.items()]);
+    } else {
+      this.quitar(id, talla);
     }
   }
 }

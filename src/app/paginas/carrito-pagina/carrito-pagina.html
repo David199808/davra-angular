@@ -6,6 +6,9 @@
       <li>
         {{ producto.nombre }} - {{ prenda.talla }} x {{ prenda.cantidad }} =
         {{ producto.precio * prenda.cantidad | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+        <button (click)="carrito.restar(prenda.id, prenda.talla)">-</button>
+        <button (click)="carrito.agregar({ id: prenda.id, talla: prenda.talla })">+</button>
+        <button (click)="carrito.quitar(prenda.id, prenda.talla)">x</button>
       </li>
     }
   } @empty {
@@ -15,3 +18,23 @@
 <p>
   <strong>Total a pagar: {{ total() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</strong>
 </p>
+
+<form [formGroup]="envio" (ngSubmit)="enviar()">
+  <label>Nombre <input formControlName="nombre" /></label>
+  @if (envio.controls.nombre.invalid && envio.controls.nombre.touched) {
+    <small>Escribe tu nombre (mínimo 3 letras)</small>
+  }
+  <label>Ciudad <input formControlName="ciudad" /></label>
+  @if (envio.controls.ciudad.invalid && envio.controls.ciudad.touched) {
+    <small>La ciudad es obligatoria</small>
+  }
+  <label>Dirección <input formControlName="direccion" /></label>
+  @if (envio.controls.direccion.invalid && envio.controls.direccion.touched) {
+    <small>La dirección es obligatoria</small>
+  }
+  <label>Celular <input formControlName="celular" /></label>
+  @if (envio.controls.celular.invalid && envio.controls.celular.touched) {
+    <small>Escribe un celular de 10 números que empiece por 3</small>
+  }
+  <button type="submit" [disabled]="envio.invalid">Enviar pedido</button>
+</form>

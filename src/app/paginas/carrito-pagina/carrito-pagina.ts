@@ -1,10 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { Carrito } from '../../servicios/carrito';
 import { CurrencyPipe } from '@angular/common';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { TiendaApi } from '../../servicios/tienda-api';
 
 @Component({
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, ReactiveFormsModule],
   selector: 'app-carrito-pagina',
   styleUrl: './carrito-pagina.css',
   templateUrl: './carrito-pagina.html',
@@ -21,5 +22,31 @@ export class CarritoPagina {
 
   buscar(id: number) {
     return this.api.productos().find((p) => p.id === id);
+  }
+
+  envio = new FormGroup({
+    nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    ciudad: new FormControl('', [Validators.required]),
+    direccion: new FormControl('', [Validators.required]),
+    celular: new FormControl('', [Validators.required, Validators.pattern(/^3\d{9}$/)]),
+  });
+
+  enviar() {
+    if (this.envio.invalid) return;
+
+    const datos = this.envio.value;
+
+    const lineas = this.carrito.items().map((prenda) => {
+      const producto = this.buscar(prenda.id);
+      return `- ${producto?.nombre} talla ${prenda.talla} x ${prenda.cantidad}`;
+    });
+
+    const mensaje =
+      `Hola DAVRA, quiero hacer este pedido:\n` +
+      lineas.join('\n') +
+      `\nTotal: $${this.total()}\n` +
+      `Nombre: ${datos.nombre}\nCiudad: ${datos.ciudad}\n` +
+      `Dirección: ${datos.direccion}\nCelular: ${datos.celular}`;
+    window.open(`https://wa.me/573112626937?text=${encodeURIComponent(mensaje)}`);
   }
 }
