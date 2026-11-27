@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { Carrito } from '../../servicios/carrito';
-import { PRODUCTOS } from '../../datos/catalogo';
 import { CurrencyPipe } from '@angular/common';
+import { TiendaApi } from '../../servicios/tienda-api';
 
 @Component({
   imports: [CurrencyPipe],
@@ -10,7 +10,7 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './carrito-pagina.html',
 })
 export class CarritoPagina {
-  productos = PRODUCTOS;
+  api = inject(TiendaApi);
   carrito = inject(Carrito);
   total = computed(() =>
     this.carrito.items().reduce((suma, prenda) => {
@@ -20,6 +20,6 @@ export class CarritoPagina {
   );
 
   buscar(id: number) {
-    return this.productos.find((p) => p.id === id);
+    return this.api.productos().find((p) => p.id === id);
   }
 }
