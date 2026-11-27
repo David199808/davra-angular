@@ -19,7 +19,7 @@
   <strong>Total a pagar: {{ total() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</strong>
 </p>
 
-<form [formGroup]="envio">
+<form [formGroup]="envio" (ngSubmit)="enviar()">
   <label>Nombre <input formControlName="nombre" /></label>
   @if (envio.controls.nombre.invalid && envio.controls.nombre.touched) {
     <small>Escribe tu nombre (mínimo 3 letras)</small>
