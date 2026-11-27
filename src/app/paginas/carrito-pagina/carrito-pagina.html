@@ -6,6 +6,9 @@
       <li>
         {{ producto.nombre }} - {{ prenda.talla }} x {{ prenda.cantidad }} =
         {{ producto.precio * prenda.cantidad | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+        <button (click)="carrito.restar(prenda.id, prenda.talla)">-</button>
+        <button (click)="carrito.agregar({ id: prenda.id, talla: prenda.talla })">+</button>
+        <button (click)="carrito.quitar(prenda.id, prenda.talla)">x</button>
       </li>
     }
   } @empty {
