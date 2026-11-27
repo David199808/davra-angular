@@ -3,6 +3,7 @@ export type ProductoApi = {
   title: string;
   price: number;
   thumbnail: string;
+  category: string;
 };
 
 export type RespuestaApi = {

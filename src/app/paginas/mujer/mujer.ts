@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
-import { PRODUCTOS } from '../../datos/catalogo';
+import { Component, computed, inject } from '@angular/core';
 import { Carrito } from '../../servicios/carrito';
 import { Pedido } from '../../modelos/pedido';
 import { TarjetaProducto } from '../../tarjeta-producto/tarjeta-producto';
+import { TiendaApi } from '../../servicios/tienda-api';
 
 @Component({
   imports: [TarjetaProducto],
@@ -11,8 +11,9 @@ import { TarjetaProducto } from '../../tarjeta-producto/tarjeta-producto';
   templateUrl: './mujer.html',
 })
 export class Mujer {
+  api = inject(TiendaApi);
   carrito = inject(Carrito);
-  productos = PRODUCTOS.filter((p) => p.categoria === 'mujer');
+  productos = computed(() => this.api.productos().filter((p) => p.categoria === 'mujer'));
 
   agregar(pedido: Omit<Pedido, 'cantidad'>) {
     this.carrito.agregar(pedido);

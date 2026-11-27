@@ -2,16 +2,37 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { map } from 'rxjs';
 import { ProductoApi, RespuestaApi } from '../modelos/producto-api';
-import { Producto } from '../modelos/producto';
+import { Categoria, Producto } from '../modelos/producto';
+import { toSignal } from '@angular/core/rxjs-interop';
+
+const CATEGORIAS: Record<string, Categoria> = {
+  'mens-shirts': 'hombre',
+  'mens-shoes': 'hombre',
+  'mens-watches': 'hombre',
+  'womens-dresses': 'mujer',
+  'womens-shoes': 'mujer',
+  'womens-bags': 'mujer',
+  tops: 'mujer',
+};
 
 @Service()
 export class TiendaApi {
   http = inject(HttpClient);
 
-  obtenerCamisas() {
+  productos = toSignal(this.obtenerProductos(), { initialValue: [] });
+
+  obtenerProductos() {
     return this.http
-      .get<RespuestaApi>('https://dummyjson.com/products/category/mens-shirts')
-      .pipe(map((respuesta) => respuesta.products.map((p) => this.convertir(p))));
+      .get<RespuestaApi>('https://dummyjson.com/products?limit=0')
+      .pipe(
+        map((respuesta) =>
+          respuesta.products.filter((p) => p.category in CATEGORIAS).map((p) => this.convertir(p)),
+        ),
+      );
+  }
+
+  buscar(id: number) {
+    return this.productos().find((p) => p.id === id);
   }
 
   convertir(p: ProductoApi): Producto {
@@ -21,7 +42,7 @@ export class TiendaApi {
       precio: Math.round(p.price * 4000),
       imagen: p.thumbnail,
       tallas: ['S', 'M', 'L', 'XL'],
-      categoria: 'hombre',
+      categoria: CATEGORIAS[p.category],
     };
   }
 }

@@ -1,9 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { PRODUCTOS } from '../../datos/catalogo';
+import { Component, computed, inject } from '@angular/core';
 import { Carrito } from '../../servicios/carrito';
 import { Pedido } from '../../modelos/pedido';
 import { TarjetaProducto } from '../../tarjeta-producto/tarjeta-producto';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { TiendaApi } from '../../servicios/tienda-api';
 
 @Component({
@@ -14,9 +12,8 @@ import { TiendaApi } from '../../servicios/tienda-api';
 })
 export class Hombre {
   api = inject(TiendaApi);
-  camisas = toSignal(this.api.obtenerCamisas(), { initialValue: [] });
   carrito = inject(Carrito);
-  productos = toSignal(this.api.obtenerCamisas(), { initialValue: [] });
+  productos = computed(() => this.api.productos().filter((p) => p.categoria === 'hombre'));
 
   agregar(pedido: Omit<Pedido, 'cantidad'>) {
     this.carrito.agregar(pedido);
