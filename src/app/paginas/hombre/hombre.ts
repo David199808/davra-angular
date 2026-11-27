@@ -3,6 +3,8 @@ import { PRODUCTOS } from '../../datos/catalogo';
 import { Carrito } from '../../servicios/carrito';
 import { Pedido } from '../../modelos/pedido';
 import { TarjetaProducto } from '../../tarjeta-producto/tarjeta-producto';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { TiendaApi } from '../../servicios/tienda-api';
 
 @Component({
   imports: [TarjetaProducto],
@@ -11,8 +13,10 @@ import { TarjetaProducto } from '../../tarjeta-producto/tarjeta-producto';
   templateUrl: './hombre.html',
 })
 export class Hombre {
+  api = inject(TiendaApi);
+  camisas = toSignal(this.api.obtenerCamisas(), { initialValue: [] });
   carrito = inject(Carrito);
-  productos = PRODUCTOS.filter((p) => p.categoria === 'hombre');
+  productos = toSignal(this.api.obtenerCamisas(), { initialValue: [] });
 
   agregar(pedido: Omit<Pedido, 'cantidad'>) {
     this.carrito.agregar(pedido);
